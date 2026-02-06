@@ -12,7 +12,7 @@ signal health_changed(health_value)
 var health = 3
 var ammo_count = 15
 
-const SPEED = 5.5
+var SPEED = 5.5
 const JUMP_VELOCITY = 10.0
 const LOOK_SPEED = 5 # Adjust as needed for controller comfort
 
@@ -62,6 +62,11 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+
+	if Input.is_action_pressed("player_sprint"):
+		SPEED = 8
+	else:
+		SPEED = 5.5
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
