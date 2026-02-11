@@ -50,7 +50,6 @@ func _unhandled_input(event):
 		play_shoot_effects.rpc()
 		if raycast.is_colliding():
 			var hit_player = raycast.get_collider()
-			hit_player.enemydamage
 			hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 			print(hit_player)
 			
@@ -104,6 +103,7 @@ func _physics_process(delta):
 func play_shoot_effects():
 	anim_player.stop()
 	anim_player.play("shoot")
+	$AudioStreamPlayer3D.play()
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
 
