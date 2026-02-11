@@ -6,11 +6,13 @@ signal health_changed(health_value)
 @onready var anim_player = $AnimationPlayer
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
-@onready var ammo_display = $Camera3D/AmmoDisplay
-
+@onready var hud = world.get_node("CanvasLayer/HUD")
+@onready var ammo_display = hud.get_node("AmmoDisplay")
 
 var health = 3
 var ammo_count = 15
+
+var reloading = false
 
 var SPEED = 5.5
 const JUMP_VELOCITY = 10.0
@@ -40,8 +42,7 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 	
-	if Input.is_action_just_pressed("reload"):
-		await get_tree().create_timer(1).timeout
+	if Input.is_action_just_pressed("reload") and !reloading and anim_player.current_animation != "shoot":
 		upd_ammo(0, true) # call reload update
 	
 	if Input.is_action_just_pressed("shoot") and anim_player.current_animation != "shoot" and ammo_count > 0:
@@ -123,7 +124,10 @@ func _on_animation_player_animation_finished(anim_name):
 
 func upd_ammo(num: int, reload: bool = false):
 	if reload:
+		reloading = true
+		await get_tree().create_timer(1).timeout
 		ammo_count = 15
+		reloading = false
 	else:
 		ammo_count += num
 	ammo_display.text = "%d / 15" % ammo_count
