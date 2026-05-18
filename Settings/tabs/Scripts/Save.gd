@@ -39,8 +39,6 @@ func save_data():
 
 func toggle_vsync(value):
 	if value == 1:
-		DisplayServer.VSyncMode.VSYNC_ENABLED
-	elif value == 2:
 		DisplayServer.VSyncMode.VSYNC_ADAPTIVE
 	elif value == 0:
 		DisplayServer.VSyncMode.VSYNC_DISABLED
