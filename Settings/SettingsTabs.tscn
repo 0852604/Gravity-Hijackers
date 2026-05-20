@@ -69,7 +69,7 @@ tooltip_text = "Ryan Sucks"
 layout_mode = 2
 
 [node name="Control2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1519781035 instance=ExtResource("2_262lw")]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(1500, 50)
 layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer" unique_id=874790990]
