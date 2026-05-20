@@ -44,9 +44,9 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
-	#add_child(speed_pickup_scene_instantiated)
-	#speed_pickup_scene.speed_pickup_pickedup.connect(_on_speed_pickup_pickedup)
-	#speed_pickup_instantiated.speed_pickup_pickedup = true
+	add_child(speed_pickup_scene_instantiated)
+	remove_child(speed_pickup_scene_instantiated)
+	speed_pickup_scene_instantiated.speed_pickup_pickedup.connect(_on_speed_pickup_pickedup)
 	
 	if not is_multiplayer_authority(): return
 	
@@ -57,8 +57,12 @@ func _ready():
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _on_speed_pickup_pickedup():
-	pass
+func _on_speed_pickup_pickedup(value):
+	print("SPEED_PICKUP")
+	speed_pickup_multiplier = value
+
+
+
 
 
 
@@ -119,7 +123,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("player_sprint"):
 		SPEED = 8 * speed_pickup_multiplier
 	else:
-		SPEED = 5.5
+		SPEED = 5.5 * speed_pickup_multiplier
 
 	if Input.is_action_just_pressed("player_crouch"):
 		print("crouch")
