@@ -9,8 +9,8 @@ const SAVEFILE = "user://Settings.save"
 
 func _ready():
 	load_data()
-	X_Mouse_sens_Multi = game_data.X_Mouse_sens_Multi
-	Y_Mouse_sens_Multi = game_data.Y_Mouse_sens_Multi
+	#X_Mouse_sens_Multi = game_data.X_Mouse_sens_Multi
+	#Y_Mouse_sens_Multi = game_data.Y_Mouse_sens_Multi
 
 func load_data():
 	var file = FileAccess.open(SAVEFILE, FileAccess.READ)
